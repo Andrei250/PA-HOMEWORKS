@@ -1,0 +1,7 @@
+./stocks.cpp:6:  Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
+./stocks.cpp:6:  Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]
+./stocks.cpp:26:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
+Done processing ./crypto.cpp
+Done processing ./_utils/verif.cpp
+Done processing ./stocks.cpp
+Total errors found: 3
