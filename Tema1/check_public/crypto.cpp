@@ -114,5 +114,7 @@ int main(int argc, char **argv) {
     solution->process();
     solution->getResult(output);
 
+    delete(solution);
+
     return 0;
 }
