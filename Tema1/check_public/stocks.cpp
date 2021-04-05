@@ -5,6 +5,7 @@ using namespace std;
 ifstream f("stocks.in");
 ofstream g("stocks.out");
 
+// clasa pentru a memora tripletul la citire
 class Triplet {
  public:
     long long price, minPrice, maxPrice;
@@ -24,6 +25,7 @@ class Triplet {
     }
 };
 
+// clasa care rezolva problema
 class Solution {
  public:
     long long N, B, L;
@@ -31,6 +33,7 @@ class Solution {
     long long profit;
     long long d[105][505][505];
 
+    // citesc valorile de la tastatura
     Solution() {
         profit = 0;
 
@@ -47,6 +50,10 @@ class Solution {
         f.close();
     }
 
+    // aflu raspunsul folosind o matrice tridimensionala astfel:
+    // dp[i][j][k] - profitul maxim obtinut prin considerarea primelor
+    // i optiuni, cu bugetul maxim j si pierderea maxima k
+    // problema este ca problema rucsacului cu mai multe variabile
     void process() {
         for (long long i = 0; i <= N; ++i) {
             for (long long j = 0; j <= B; ++j) {
@@ -58,6 +65,7 @@ class Solution {
 
         d[0][0][0] = 0;
 
+        // parcurg toate cele N optiuni
         for (long long i = 1; i <= N; ++i) {
             long long loss = options[i - 1].getLoss();
             long long price = options[i - 1].price;
@@ -65,6 +73,7 @@ class Solution {
             long long maxPr = options[i - 1].maxPrice;
             long long prf = options[i - 1].getProfit();
 
+            // completez matricea la fel ca la problmea rucsacului
             for (long long b = 0; b <= B; ++b) {
                 for (long long l = 0; l <= L; ++l) {
                     d[i][b][l] = max(d[i][b][l], d[i - 1][b][l]);

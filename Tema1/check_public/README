@@ -1,0 +1,64 @@
+Dumitrescu Andrei 323CC:
+
+Problema 1 - ideea algoritmului:
+    - aplic cautare binara pe un intervbal (0 - INT_MAX - 1)
+    - caut o valoarea a procesoarelor care poate fi atinsa
+        cu bugetul oferit.
+    - daca valoare mid este buna, caut la dreapta pentru o
+        valoarea si mai buna.
+    - in caz contrar, caut in stanga pentru a gasi valoarea dorita.
+    - Complexitate: O(n * log I), unde I este lungimea intervalului
+
+Problema 2 - idee algoritm:
+    - este aceeasi ca la problema rucsacului, doar ca aici se afla 3
+        dimensiuni
+    - dp[i][j][k] - profitul maxim obtinut prin considerarea primelor
+        i optiuni, cu bugetul maxim j si pierderea maxima k
+    - la fiecare pas verific daca pot ajunge la dp[i][j][k] de la
+        punctul i - 1, j - costul lui i, k - pierdere i 
+    - daca se poate ajunge, atunci updatez maximul in acel punct
+    - daca nu, acesta ramane cu valoare i - 1, j, k, deoarece
+        optiunea i nu ajut ala modificarea profitului
+    - la final se parcug optiunile de pe dimensiunea 1, linia N
+
+Problema 3 - idee algoritm:
+    - pentru fiecare element din vector, aflu care este valoarea
+        minima din stanga lui, valoare minima din dreapta lui,
+        costul modificarii tuturor elementelor din stanga (inclusiv el)
+        pentru a obtine o secventa descrescatoare de la stanga la dreapta
+        si costul modificarii tuturor elementelor din dreapta (inclusiv el)
+        pentru a obtine o secventa descrescatoare de la dreapta la stanga
+    - calculez solutia, neluand in considerare de 2 ori valoare din i
+        astfel raspunsul este minimul costului fiecarui punct pentru
+        a deveni punctul de minim
+    - daca la fiecare pas value < 0, atunci optiunea dp[i][step] = LLONG_MAX
+        si sar pasul respectiv, deoarece acea valoarea nu poate fi indeplinita
+
+Problema 4 - idee algoritm:
+    - cea mai importanta observatie este ca nu este nevoie sa sape
+        mai mult de 2 unitati, deoarece in orice ordine am
+        pune varfurile, trebuie sa fie lua in considerare 3 elemente
+        consecutive pentru a fi diferite
+    - astfel pentru fiecare punct calculam solutia cea mai buna
+        excavand din el 0, 1, sau 2 unitati
+        de aceea recurenta este dp[i][step] = minimul dintre
+        valorile celor 3 steps de la i - 1 (astfel incat valoarea
+        mountains[i - 1].first - steps sa fie diferita de
+        valorile considerate pentru minim) si step * mountains[i].second
+        care reprezinta costul excavarii cu step unitati
+        avand in vedere ca ne folosim doar de pasul anterior, o sa
+        folosim o matrice de 3 x 3 ( linia 0 este nefolosita )
+        si dupa calcularea elementelor pentru punctul i in linia 2,
+        acestea se muta pe linia 1
+    - la final se ia optiunea ce amai buna dintre cei 3 steps (0, 1, 2)
+        si acela este raspunsul
+
+
+
+
+Referinte: 
+    https://www.geeksforgeeks.org/minimize-the-cost-to-make-all-the-adjacent-elements-distinct-in-an-array/
+    - pentru problema 4. Codul a fost inteles si modificat pentru a indeplini
+        taskul
+    - problema a fost optimizata din punct de vedere al memoriei, aceasta
+        devenind constanta

@@ -9,6 +9,9 @@ class Solution {
     int numberOfComputers;
     int totalPrice;
 
+    // contructor explicit pentru a deschide fisierul de input dat ca
+    // parametru
+    // citesc valorile de la tastatura
     explicit Solution(string input) {
         answer = 0;
         ifstream f(input);
@@ -25,14 +28,7 @@ class Solution {
         f.close();
     }
 
-    static bool cmp(pair<int, int> a, pair<int, int> b) {
-        if (a.first == b.first) {
-            return a.second > b.second;
-        }
-
-        return a.first < b.first;
-    }
-
+    // verific daca valoarea curenta poate fi o valoare valida
     bool processValue(int value) {
         int computedPrice = 0;
 
@@ -51,10 +47,12 @@ class Solution {
         return true;
     }
 
+    // fac o cautare binara intre lower si upper pentru a gasii valoarea
+    // valida
+    // astfel daca mid este o valoarea valida, caut in dreapta (pentru
+    // a imbunatati solutia) sau in stanga in caz contrar
     void process() {
-        // int computedPrice = 0;
         bool done = false;
-
         int lower = 0, upper = INT_MAX - 1;
 
         while (lower <= upper) {
@@ -66,29 +64,9 @@ class Solution {
                 upper = mid - 1;
             }
         }
-
-        // sort(computers.begin(), computers.end(), cmp);
-        // while (!done && computedPrice < totalPrice) {
-        //     for (int index = 0; index < computers.size(); index++) {
-        //         if (computedPrice + computers[index].second > totalPrice) {
-        //             done = true;
-        //             break;
-        //         }
-        //         computedPrice += computers[index].second;
-        //         computers[index].first++;
-        //         if (index < computers.size() - 1 &&
-        //               computers[index].first - 1 !=
-        //               computers[index + 1].first ) {
-        //             break;
-        //         }
-        //     }
-        // }
-        // answer = INT_MAX;
-        // for (auto it : computers) {
-        //     answer = min(answer, it.first);
-        // }
     }
 
+    // afisez raspunsul
     void getResult(string output) {
         ofstream g(output);
 

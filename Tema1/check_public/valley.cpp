@@ -11,6 +11,7 @@ class Solution {
     vector<long long> points;
     long long answer;
 
+    // citesc valorile de la tastatura
     Solution() {
         answer = LLONG_MAX;
         f >> N;
@@ -25,6 +26,7 @@ class Solution {
         f.close();
     }
 
+    // minimul dintre 2 elemente long long
     long long minimum(long long a, long long b) {
         if (a - b >= 0) {
             return b;
@@ -33,6 +35,13 @@ class Solution {
         return a;
     }
 
+    // calculez solutia
+    // pentru fiecare element din vector, aflu care este valoarea
+    // minima din stanga lui, valoare minima din dreapta lui,
+    // costul modificarii tuturor elementelor din stanga (inclusiv el)
+    // pentru a obtine o secventa descrescatoare de la stanga la dreapta
+    // si costul modificarii tuturor elementelor din dreapta (inclusiv el)
+    // pentru a obtine o secventa descrescatoare de la dreapta la stanga
     void process() {
         vector<long long> leftMin(N + 1, 0LL);
         vector<long long> rightMin(N + 1, 0LL);
@@ -56,6 +65,9 @@ class Solution {
                     (points[i] <= rightMin[i] ? 0 : (points[i] - rightMin[i]));
         }
 
+        // calculez solutia, neluand in considerare de 2 ori valoare din i
+        // astfel raspunsul este minimul costului fiecarui punct pentru
+        // a deveni punctul de minim
         for (int i = 1; i < N - 1; ++i) {
             if (leftMin[i] > rightMin[i]) {
                 answer = minimum(answer, removeRight[i] + removeLeft[i - 1]);
