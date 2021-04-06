@@ -3,7 +3,7 @@ build:
 	g++ stocks.cpp -o stocks
 	g++ valley.cpp -o valley
 	g++ ridge.cpp -o ridge
-	g++ trigigel.cpp =o trigigel
+	g++ trigigel.cpp -o trigigel
 
 run-p1:
 	./crypto
