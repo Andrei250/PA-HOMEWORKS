@@ -1,0 +1,67 @@
+Dumitrescu Andrei 323CC:
+
+Problema 1:
+    - folosesc algoritmul lui Lee pentru a afla drumurile minime
+    - astfel am un unordered_map pentru a retine directiile in 
+        care poate sa mearga fiecare pod (V, O, D)
+    - codific podurile pentru a fi mai usor, cu numere negative
+    -1 => nu se poate merge
+    -2 => podul D
+    -3 => podul O
+    -4 => podul V
+    - astfel cand parcurg matricea pot merge doar pe celulele
+        cu valori negative ( diferite de -1 ) si dupa completez
+        cu numarul de poduri parcurse pana in acel punct
+    - daca ies din matrice atunci compar raspunsul acela cu minimul
+        global
+    - daca minimul global nu se schimba, atunci raspunsul este -1
+
+Complexitate temporala: O (N * M)
+Complexitate spatiala: O (N * M)
+
+Problema 2:
+    - Folosesc un unordered_map pentru a retine prima aparitie a
+        fiecarui mail. 
+    - daca un mail nu apare deloc, atunci il marchez in hashmap
+    - daca apare, atunci creez un graf si fac legatura intre
+        clientul curent si prima aparitie a mailului respectiv
+    - retin un vector de clienti cu informatiile fiecarul client
+    - la final parcurg graful si il impart in componente conexe
+    - fiecare componenta conexa este un client individual, din
+        care extrag toate mailurile unice (folosing unordered_set)
+        si retin numele cel mai mic lexicografic
+    - la final bag toti clientii unici intr-un vector si il sortez
+
+Complexitate temporala: O (N * K * logK)
+Complexitate spatiala: O (N * K)
+
+Problema 3:
+    - generez toate solutiile posibile
+    - in functia check creez, conform problemei coin change de programare
+        dinamica, un vector cu toate sumele ce se pot creez folosind T
+        piese si apoi verific cea mai mare suma consecutiva
+    - de fiecare data compar cu maximul si retin raspunsul cel mai bun
+
+Complexitate temporala: O (K! * N * K)
+Complexitate spatiala: O ((K + 1) ^ 2 + (T + 1))
+
+Problema 4:
+    - Alcatuiesc graful si caut punctele de articulatie
+    - pentru fiecare punct de articulatie retin numarul de noduri din
+        fiecare componenta biconexa din josul sau in arborele DFS
+    - pentru fiecare nod, verific daca e nod de articulatie
+    - daca nu este nod de articulatie, atunci raspunsul este
+        2 * (N - 1) => fiecare nod nu se mai conecteaza cu nodul sters
+        si nodul sters nu se conecteaza cu celalalte noduri
+    - daca este nod de articulatie , atunci suma finala este
+        2 * (N - 1) (aceeasi logica ca la conditia de nu a fi)
+        + fiecare combinatie de componente conexe
+    - Adica daca nodul curent sparge graful in mai multe componente
+        de lungimi x1, x2, .. xn, atunci de fiecare data adun
+        x1 * (N - 1 - x1)
+        la final aduc si situatia cu componenta conexa aflata deasupra
+        nodului sters in arborele DFS (deoarece tin cont doar de numarul)
+        de noduri aflate mai jos
+
+Complexitate temporala: O (N * W), unde W este numarul de componente biconexe
+Complexitate spatiala: O (N * M)
