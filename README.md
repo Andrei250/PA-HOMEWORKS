@@ -1,3 +1,3 @@
 # PA-HOMEWORKS
 
-Pentru fiecare tema fisierele se afla in folderul cehckerului
+Pentru fiecare tema fisierele se afla in folderul checkerului
